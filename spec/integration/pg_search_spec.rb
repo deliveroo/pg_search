@@ -571,7 +571,7 @@ describe "an Active Record model which includes PgSearch" do
           }
       end
 
-      if ActiveRecord::Base.connection.send(:postgresql_version) < 80400
+      if ActiveRecord::Base.connection.raw_connection.server_version < 80400
         it "is unsupported in PostgreSQL 8.3 and earlier" do
           expect {
             ModelWithPgSearch.search_title_with_prefixes("abcd\303\251f")
@@ -1104,7 +1104,7 @@ describe "an Active Record model which includes PgSearch" do
           :ignoring => :accents
       end
 
-      if ActiveRecord::Base.connection.send(:postgresql_version) < 90000
+      if ActiveRecord::Base.connection.raw_connection.server_version < 90000
         it "is unsupported in PostgreSQL 8.x" do
           expect {
             ModelWithPgSearch.search_title_without_accents("abcd\303\251f")

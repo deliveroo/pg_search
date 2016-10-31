@@ -20,7 +20,7 @@ begin
                                           :username => database_user,
                                           :min_messages => 'warning')
   connection = ActiveRecord::Base.connection
-  postgresql_version = connection.send(:postgresql_version)
+  postgresql_version = connection.raw_connection.server_version
   connection.execute("SELECT 1")
 rescue *error_classes
   at_exit do
